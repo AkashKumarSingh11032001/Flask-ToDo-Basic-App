@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
@@ -18,8 +18,11 @@ class Todo(db.Model):
     def __repr__(self) -> str:
         return f"{self.sno} - {self.title}"
 
-@app.route("/")
+@app.route("/",methods = ['GET','POST'])
 def index():
+    # ---> reciving data from form 
+    if request.method == "POST":
+        print(request.form['title'])
     todo = Todo(title="First todo", desc = "Start investing in Stock market")
     db.session.add(todo)
     db.session.commit()
