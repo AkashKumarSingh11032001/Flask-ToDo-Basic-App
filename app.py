@@ -22,12 +22,13 @@ class Todo(db.Model):
 def index():
     # ---> reciving data from form 
     if request.method == "POST":
-        print(request.form['title'])
-    todo = Todo(title="First todo", desc = "Start investing in Stock market")
-    db.session.add(todo)
-    db.session.commit()
+        title = request.form['title']
+        desc = request.form['desc']
+        todo = Todo(title=title, desc = desc)
+        db.session.add(todo)
+        db.session.commit()
+
     allTodo = Todo.query.all()
-    print(allTodo)
     return render_template("index.html",allTodo = allTodo)
 
 
