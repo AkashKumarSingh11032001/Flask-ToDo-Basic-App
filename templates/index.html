@@ -58,7 +58,7 @@
 
     <div class="container my-3">
         <h2> Add Todo </h2>
-        
+        <form action="/" method="POST">
         <form>
             <div class="mb-3">
               <label for="title" class="form-label">ToDo Title</label>
@@ -77,30 +77,24 @@
         <table class="table">
             <thead>
               <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                <th scope="col">SNo</th>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Time</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>@twitter</td>
-              </tr>
+                {% for todo in allTodo %}
+                <tr>
+                    <th scope="row">{{loop.index}}</th> <!-- # ---> for countinuation of digit -->
+                    <td>{{todo.title}}</td>
+                    <td>{{todo.desc}}</td>
+                    <td>{{todo.date_created}}</td>
+                  </tr>
+                    
+                {% endfor %}
+              
+              
             </tbody>
           </table>
     </div>

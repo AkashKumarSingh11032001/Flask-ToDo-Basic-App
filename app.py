@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
 app = Flask(__name__)
+# ---> database configuration
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///todo.db"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
@@ -19,7 +20,12 @@ class Todo(db.Model):
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    todo = Todo(title="First todo", desc = "Start investing in Stock market")
+    db.session.add(todo)
+    db.session.commit()
+    allTodo = Todo.query.all()
+    print(allTodo)
+    return render_template("index.html",allTodo = allTodo)
 
 
     
